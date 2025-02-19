@@ -1,0 +1,251 @@
+/* =========================================
+   Latest News Section 样式
+   1. 整体布局
+   2. 顶部区域
+     - 标题样式
+     - 装饰线
+   3. 主要区域
+   4. 新闻卡片
+     - 卡片布局
+     - 图片样式
+     - 内容区域
+     - 按钮样式
+   5. 新闻详情弹窗
+     - 弹窗结构
+     - 内容区域
+     - 图片区域
+   ========================================= */
+
+/* 1. 整体布局 */
+.latest-news-section {
+    width: 100%;
+    background-color: #FFFFFF;
+    min-height: 100vh;  /* 最小高度设为视口高度 */
+    margin-top: 56px;
+    margin-bottom: 48px;
+}
+
+/* 2. 顶部区域 */
+/* 标题样式 */
+.latest-news__header {
+    width: 100%;
+    height: 136px;
+    padding: 18px 50px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.latest-news__title {
+    max-width: var(--container-width);
+    margin: 0;
+    padding: 0;
+    display: block;
+    color: var(--primary-color);
+    font-size: var(--font-size-h1);
+    font-weight: 600;
+    position: relative;
+    line-height: 1.2;
+    text-align: left;
+    padding-left: 24px;
+}
+
+/* 装饰线 */
+.latest-news__title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+    width: 16px;
+    height: 30%;
+    background: var(--color-secondary);  /* 使用次要色调 */
+}
+
+/* 3. 主要区域 */
+.latest-news__main {
+    width: 100%;
+    height: auto;  /* 高度自适应内容 */
+    padding: 18px 50px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+/* 4. 新闻卡片 */
+/* 卡片布局 */
+.news-card {
+    width: 100%;
+    height: 200px;  /* 固定卡片高度为200px */
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: row-reverse;  /* 图片放在右侧 */
+}
+
+/* 图片样式 */
+.news-card__img {
+    width: 320px;
+    height: 100%;  /* 图片高度自动填充卡片高度 */
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;  /* 防止图片被压缩 */
+}
+
+/* 内容区域 */
+.news-card__content {
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.news-card__title {
+    font-size: 20px;
+    color: #0E3E2A;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.news-card__date {
+    font-size: 14px;
+    color: #666666;
+    margin: 16px 0;
+}
+
+.news-card__text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* 按钮样式 */
+.news-card__link {
+    color: #86A444;
+    text-decoration: none;
+    font-weight: bold;
+    width: fit-content;
+    margin-top: auto;  /* 将按钮推到底部 */
+    padding: 8px 24px;
+    border: 2px solid #86A444;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.news-card__link:hover {
+    background: #86A444;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(134, 164, 68, 0.3);
+}
+
+/* 5. 新闻详情弹窗 */
+/* 弹窗结构 */
+.news-modal {
+    position: fixed;
+    left: 0;
+    width: 100vw;
+    display: none;
+    z-index: 100;
+    transform-origin: top;  /* 从顶部开始变换 */
+}
+
+.news-modal.active {
+    display: block;
+}
+
+.news-modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.news-modal__content {
+    position: fixed;
+    left: 50px;
+    right: 50px;
+    width: calc(100vw - 100px);
+    height: 85vh;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    padding: 0;
+    z-index: 102;
+    transition: all 0.3s ease;
+    transform: translateY(-100%);  /* 初始位置在可视区域上方 */
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.news-modal__content.active {
+    transform: translateY(0);  /* 滑入到目标位置 */
+    opacity: 1;
+}
+
+.news-modal__close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #1B4332;
+    z-index: 1;
+}
+
+/* 内容区域 */
+.news-modal__body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.news-modal__text {
+    flex: 2;
+    padding: 48px;
+    overflow-y: auto;
+}
+
+.news-modal__title {
+    font-size: 32px;
+    font-weight: normal;
+    color: #1B4332;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.news-modal__date {
+    font-size: 16px;
+    color: #86A444;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 32px;
+}
+
+.news-modal__article {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* 图片区域 */
+.news-modal__image {
+    flex: 1;
+    background-color: #F5F5F5;
+}
+
+.news-modal__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} 

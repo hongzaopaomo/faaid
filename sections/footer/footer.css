@@ -1,0 +1,334 @@
+/**
+ * 页脚样式
+ */
+
+.footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-xxl) 0 var(--spacing-lg);
+}
+
+/* 主要内容区域 */
+.footer__content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 组织信息 */
+.footer__info {
+    max-width: 400px;
+}
+
+.footer__logo {
+    height: 60px;
+    margin-bottom: var(--spacing-md);
+}
+
+.footer__description {
+    font-size: var(--font-size-md);
+    line-height: 1.6;
+    opacity: 0.8;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* 社交媒体链接 */
+.footer__social {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-fast);
+}
+
+.social-link:hover {
+    background: var(--color-secondary);
+}
+
+/* 快速链接 */
+.footer__links h3,
+.footer__contact h3,
+.footer__newsletter h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-lg);
+    font-weight: 500;
+}
+
+.footer__links ul li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer__links ul li a {
+    opacity: 0.8;
+    transition: opacity var(--transition-fast);
+}
+
+.footer__links ul li a:hover {
+    opacity: 1;
+}
+
+/* 联系方式 */
+.footer__contact ul li {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    opacity: 0.8;
+}
+
+.footer__contact ul li i {
+    color: var(--color-secondary);
+}
+
+/* 订阅表单 */
+.footer__newsletter p {
+    opacity: 0.8;
+    margin-bottom: var(--spacing-md);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-white);
+}
+
+.newsletter-form input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* 底部版权信息 */
+.footer__bottom {
+    width: 100%;
+    height: 64px;
+    padding: 18px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__bottom p {
+    opacity: 0.8;
+}
+
+.footer__legal {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.footer__legal a {
+    opacity: 0.8;
+    transition: opacity var(--transition-fast);
+}
+
+.footer__legal a:hover {
+    opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .footer__content {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-xxl) var(--spacing-xl);
+    }
+
+    .footer__info {
+        grid-column: 1 / -1;
+        max-width: none;
+    }
+
+    .footer__bottom {
+        padding: 18px 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer__content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+    }
+
+    .footer__bottom {
+        height: auto;
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+        padding: 24px;
+    }
+
+    .footer__legal {
+        justify-content: center;
+    }
+}
+
+/* Footer Section */
+.footer-section {
+    width: 100%;
+    background-color: #1B4332;
+    color: #FFFFFF;
+    height: 248px;
+    margin-top: 64px;
+}
+
+/* 顶部区域 */
+.footer__top {
+    width: 100%;
+    height: 184px;
+    padding: 18px 100px;
+    padding-bottom: 32px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__subscribe {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.footer__subscribe-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.footer__input-group {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.footer__input-group label {
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+.footer__input-group input {
+    flex: 1;
+    height: 48px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #F5F7F2;
+    font-size: 16px;
+}
+
+.footer__subscribe-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    background-color: #86A444;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.footer__subscribe-btn:hover {
+    background-color: #6B8336;
+}
+
+.footer__subscribe-text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+}
+
+/* 底部区域 */
+.footer__bottom {
+    width: 100%;
+    height: 64px;
+    padding: 18px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__bottom-left {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer__bottom-right {
+    display: flex;
+    gap: 24px;
+}
+
+.footer__bottom-right a {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer__bottom-right a:hover {
+    color: #FFFFFF;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .footer__top {
+        padding: 18px 50px;
+        padding-bottom: 32px;
+        height: auto;
+    }
+
+    .footer__input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .footer__bottom {
+        padding: 18px 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-section {
+        height: auto;
+    }
+
+    .footer__top {
+        padding: 24px;
+        padding-bottom: 32px;
+    }
+
+    .footer__bottom {
+        height: auto;
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+        padding: 24px;
+    }
+
+    .footer__bottom-right {
+        flex-direction: column;
+        gap: 16px;
+    }
+} 

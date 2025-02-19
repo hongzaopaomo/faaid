@@ -1,0 +1,74 @@
+/**
+ * 全局变量定义
+ * 包含：颜色、间距、字体、容器宽度等基础变量
+ */
+
+:root {
+    /* 颜色系统 */
+    --color-primary: #1B4332;      /* 主色调：深绿色 */
+    --color-secondary: #86A444;    /* 次要色调：浅绿色 */
+    --color-text: #333333;         /* 主要文本色 */
+    --color-text-light: #666666;   /* 次要文本色 */
+    --color-white: #FFFFFF;        /* 纯白色 */
+    --color-background: #F5F5F5;   /* 背景色 */
+    --color-border: #DDDDDD;       /* 边框色 */
+
+    /* 字体系统 */
+    --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-size-base: 16px;        /* 基础字号 */
+    --font-size-sm: 0.875rem;      /* 14px */
+    --font-size-md: 1rem;          /* 16px */
+    --font-size-lg: 1.125rem;      /* 18px */
+    --font-size-xl: 1.25rem;       /* 20px */
+    --font-size-xxl: 1.5rem;       /* 24px */
+    --font-size-h1: 3.2rem;        /* 51.2px */
+    --font-size-h2: 2.4rem;        /* 38.4px */
+    --font-size-h3: 1.8rem;        /* 28.8px */
+    --font-size-h4: 1.4rem;        /* 22.4px */
+
+    /* 间距系统 */
+    --spacing-xs: 0.25rem;         /* 4px */
+    --spacing-sm: 0.5rem;          /* 8px */
+    --spacing-md: 1rem;            /* 16px */
+    --spacing-lg: 1.5rem;          /* 24px */
+    --spacing-xl: 2rem;            /* 32px */
+    --spacing-xxl: 3rem;           /* 48px */
+
+    /* 布局尺寸 */
+    --container-width: 1200px;     /* 内容最大宽度 */
+    --navbar-height: 80px;         /* 导航栏高度 */
+    --section-padding: 6rem;       /* 区块内边距 */
+
+    /* 圆角 */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+
+    /* 阴影 */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+    /* 过渡 */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* Z-index层级 */
+    --z-index-dropdown: 100;
+    --z-index-sticky: 200;
+    --z-index-fixed: 300;
+    --z-index-modal: 400;
+    --z-index-popover: 500;
+    --z-index-tooltip: 600;
+}
+
+/* 暗色主题变量 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text: #FFFFFF;
+        --color-text-light: #CCCCCC;
+        --color-background: #1A1A1A;
+        --color-border: #333333;
+    }
+} 

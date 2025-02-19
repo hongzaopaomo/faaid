@@ -1,0 +1,461 @@
+/* =========================================
+   Focus Areas Section 样式
+   1. 整体布局
+   2. 顶部区域
+      - 标题样式
+      - 装饰线
+   3. Partners 区域
+      - 合作伙伴网格
+      - Logo样式
+   4. Projects 区域
+      - 项目卡片网格
+      - 项目卡片样式
+      - AgriTech 区域
+      - AgriEdu 区域
+   5. 项目详情弹窗
+      - 弹窗基础结构
+      - 遮罩层
+      - 内容区域
+      - 文本区域
+      - 图片区域
+   6. 响应式适配
+      - 平板适配 (max-width: 1024px)
+      - 移动端适配 (max-width: 768px)
+   ========================================= */
+
+/* 1. 整体布局 */
+.focus-areas-section {
+    width: 100%;
+    background: #FBFAF6;
+    height: auto;
+    margin-top: 56px;
+    margin-bottom: 48px;
+}
+
+/* 2. 顶部区域 */
+.focus-areas__header {
+    width: 100%;
+    height: 136px;
+    padding: 18px 50px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.focus-areas__title {
+    max-width: var(--container-width);
+    margin: 0;
+    padding: 0;
+    display: block;
+    color: var(--primary-color);
+    font-size: var(--font-size-h1);
+    font-weight: 600;
+    position: relative;
+    line-height: 1.2;
+    text-align: left;
+    padding-left: 24px;
+}
+
+/* 装饰线 */
+.focus-areas__title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+    width: 16px;
+    height: 30%;
+    background: var(--color-secondary);
+}
+
+/* 3. Partners 区域 */
+.focus-areas__partners {
+    width: 100%;
+    height: 48px;
+    padding: 0 50px;
+    margin-bottom: 64px;
+}
+
+.partners__grid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.partner__logo {
+    max-width: 160px;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.partner__logo:hover {
+    filter: grayscale(0%);
+}
+
+/* 4. Projects 区域 */
+.focus-areas__projects {
+    width: 100%;
+}
+
+/* 项目卡片网格 */
+.projects__section {
+    padding: 16px 50px;
+}
+
+.projects__subtitle {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 32px;
+}
+
+.projects__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    width: 100%;
+}
+
+/* AgriEdu 区域特殊处理 */
+.projects__section:last-child .projects__cards {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* 项目卡片样式 */
+.project-card {
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+}
+
+.project-card__img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.project-card h4 {
+    color: var(--primary-color);
+    font-size: 20px;
+    margin: 16px 16px 8px;
+}
+
+.project-card p {
+    color: #666;
+    font-size: 16px;
+    margin: 0 16px 16px;
+    line-height: 1.5;
+    flex: 1;
+}
+
+/* 5. 项目详情弹窗 */
+/* 弹窗容器 */
+.project-modal {
+    position: fixed;
+    left: 0;
+    width: 100vw;
+    display: none;
+    z-index: 100;
+    transform-origin: top;  /* 从顶部开始变换 */
+}
+
+.project-modal.active {
+    display: block;
+}
+
+/* 遮罩层 */
+.project-modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 101;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.project-modal__overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 内容区域 */
+.project-modal__content {
+    position: fixed;
+    left: 50px;
+    right: 50px;
+    width: calc(100vw - 100px);
+    height: 85vh;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    padding: 0;
+    z-index: 102;
+    transition: all 0.3s ease;
+    transform: translateY(-100%);  /* 初始位置在可视区域上方 */
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.project-modal__content.active {
+    transform: translateY(0);  /* 滑入到目标位置 */
+    opacity: 1;
+}
+
+/* 标题区域 */
+.project-modal__header {
+    width: 100%;
+    background: #86A444;
+    padding: 32px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    height: 96px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.project-modal__title {
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: normal;
+    line-height: 1.2;
+    margin: 0;
+    flex: 1;
+}
+
+/* 关闭按钮 */
+.project-modal__close {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 32px;
+    cursor: pointer;
+    width: 40px;  /* 增加点击区域 */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.project-modal__close:hover {
+    transform: rotate(90deg);
+}
+
+/* 内容布局 */
+.project-modal__body {
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    gap: 64px;
+    padding: 32px 50px;  /* 保持原有内边距 */
+    position: relative;
+}
+
+/* 左侧：详情内容 */
+.project-modal__text {
+    flex: 1;
+    max-width: 70%;
+    height: 100%;
+}
+
+/* 右侧：图片区域 */
+.project-modal__image {
+    flex: 1;
+    background-color: #F5F5F5;
+    max-width: 30%;
+    height: 100%;
+}
+
+.project-modal__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 6. 响应式适配 */
+@media (max-width: 1024px) {
+    /* 项目卡片网格 */
+    .projects__cards,
+    .projects__section:last-child .projects__cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* 整体布局 */
+    .focus-areas-section {
+        padding: 40px 0;
+    }
+    
+    /* Partners 区域 */
+    .partners__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .partner__logo {
+        max-width: 120px;
+    }
+    
+    /* Projects 区域 */
+    .projects__section,
+    .projects__section:last-child {
+        padding: 40px 24px;
+    }
+    
+    .projects__cards,
+    .projects__section:last-child .projects__cards {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 项目卡片 */
+    .project-card {
+        min-height: 300px;
+    }
+    
+    .project-modal__content {
+        left: 24px;
+        right: 24px;
+        width: calc(100vw - 48px);
+        height: 85vh;
+    }
+    
+    .project-modal__header {
+        padding: 24px;
+        height: 80px;
+        margin-bottom: 24px;  /* 移动端减小外边距 */
+    }
+    
+    .project-modal__title {
+        font-size: 24px;
+        padding-right: 16px;  /* 移动端减小间距 */
+    }
+    
+    .project-modal__body {
+        flex-direction: column;
+        gap: 24px;
+        padding: 0 24px 32px;
+    }
+    
+    .project-modal__text {
+        max-width: 100%;
+        height: auto;
+        padding-bottom: 24px;  /* 移动端减小底部内边距 */
+    }
+    
+    .project-modal__image {
+        height: 240px;
+    }
+    
+    .project-modal__close {
+        width: 32px;  /* 移动端减小按钮尺寸 */
+        height: 32px;
+    }
+    
+    .project-modal__description {
+        padding-bottom: 32px;  /* 移动端减小底部内边距 */
+    }
+}
+
+/* 工具类 */
+.no-scroll {
+    overflow: hidden;
+}
+
+/* 详情内容样式 */
+.project-modal__section {
+    margin-bottom: 32px;  /* 改为底部边距 */
+}
+
+/* 第一个section不需要顶部边距 */
+.project-modal__section:first-child {
+    margin-top: 0;
+}
+
+/* 最后一个section需要额外的底部边距 */
+.project-modal__section:last-child {
+    margin-bottom: 64px;
+}
+
+.project-modal__section h4 {
+    color: #0E3E2A;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #86A444;
+}
+
+.project-modal__subsection {
+    margin: 16px 0;
+    padding-left: 16px;
+}
+
+.project-modal__subsection h5 {
+    color: #1B4332;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.project-modal__subsection h5::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background: #86A444;
+    margin-right: 8px;
+}
+
+.project-modal__description {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0 0 16px;
+    padding-bottom: 64px;  /* 添加底部内边距 */
+}
+
+.project-modal__description li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 12px;
+    color: #666;
+}
+
+.project-modal__description li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #86A444;
+}
+
+.project-modal__description strong {
+    color: #0E3E2A;
+    font-weight: 600;
+    background: #E8F3D6;
+    padding: 2px 6px;
+    border-radius: 4px;
+} 

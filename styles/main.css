@@ -1,0 +1,555 @@
+/* Base */
+@import 'base/variables.css';    /* 全局变量定义 */
+@import 'base/reset.css';        /* 重置默认样式 */
+@import 'base/typography.css';   /* 文字排版样式 */
+
+/* Sections */
+@import '../sections/hero/hero.css';
+@import '../sections/about/about.css';
+@import '../sections/focus-areas/focus-areas.css';
+@import '../sections/partners/partners.css';
+@import '../sections/latest-news/latest-news.css';
+@import '../sections/footer/footer.css';
+@import '../sections/navbar/navbar.css';
+@import '../sections/foundation-numbers/foundation-numbers.css';
+@import '../sections/foundation-board/foundation-board.css';
+
+/* Utils */
+@import 'utils/animations.css';     /* 动画效果 */
+@import 'utils/helpers.css';        /* 辅助工具类 */
+
+/* 通用容器类 */
+.container {
+    max-width: var(--container-width);  /* 最大宽度限制 */
+    margin: 0 auto;                     /* 水平居中 */
+    padding: 0 var(--spacing-md);       /* 两侧内边距 */
+}
+
+/* 全局滚动行为 */
+html {
+    scroll-behavior: smooth;            /* 平滑滚动效果 */
+}
+
+/* 全局图片处理 */
+img {
+    max-width: 100%;                    /* 图片最大宽度不超过容器 */
+    height: auto;                       /* 保持图片比例 */
+    display: block;                     /* 块级显示，避免底部间隙 */
+}
+
+/* 全局链接样式 */
+a {
+    text-decoration: none;              /* 移除下划线 */
+    color: inherit;                     /* 继承父元素颜色 */
+    transition: color 0.3s ease;        /* 颜色过渡效果 */
+}
+
+/* 全局按钮样式 */
+button {
+    cursor: pointer;                    /* 鼠标指针样式 */
+    border: none;                       /* 移除边框 */
+    background: none;                   /* 移除背景 */
+    font-family: inherit;               /* 继承字体 */
+}
+
+/* 全局列表样式 */
+ul, ol {
+    list-style: none;                   /* 移除列表样式 */
+    padding: 0;                         /* 移除内边距 */
+    margin: 0;                          /* 移除外边距 */
+}
+
+/* 全局表单元素样式 */
+input, select, textarea {
+    font-family: inherit;               /* 继承字体 */
+    font-size: inherit;                 /* 继承字体大小 */
+}
+
+/* 响应式设计基础 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-sm);   /* 移动端减小内边距 */
+    }
+}
+
+/* =========================================
+   1. 全局变量和基础设置
+   ========================================= */
+:root {
+    --primary-color: #0E3E2A;    /* 主色调：深绿色 */
+    --secondary-color: #86A444;   /* 次要色调：浅绿色 */
+    --text-color: #333;          /* 文本颜色：深灰色 */
+    --light-gray: #f5f5f5;       /* 背景色：浅灰色 */
+}
+
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 全局字体设置 */
+body {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* 确保标题也使用相同的字体 */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #86A444;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.back-to-top:hover {
+    background: #0E3E2A;
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top i {
+    font-size: 20px;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .back-to-top {
+        right: 16px;
+        bottom: 16px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .back-to-top i {
+        font-size: 16px;
+    }
+}
+
+/* Foundation Board 遮罩层 */
+.board-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);  /* 半透明黑色背景 */
+    backdrop-filter: blur(4px);       /* 背景模糊效果 */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 89;  /* 确保在弹窗下方 */
+}
+
+.board-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Foundation Board 弹出框样式 */
+.board-dropdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: #FBFAF6;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 91;  /* 确保在遮罩层上方 */
+}
+
+.board-dropdown.active {
+    height: 640px;
+}
+
+.board-dropdown__content {
+    padding: 50px;
+    height: 100%;
+    overflow-y: auto;  /* 添加垂直滚动 */
+    overflow-x: hidden;  /* 禁止水平滚动 */
+    max-width: 100vw;  /* 限制最大宽度 */
+}
+
+.board__members {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    width: 100%;  /* 使用百分比宽度 */
+    min-height: min-content;
+}
+
+.board__member {
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    width: 100%;  /* 使用百分比宽度 */
+    height: fit-content;
+}
+
+.board__member-img {
+    width: 100%;
+    aspect-ratio: 1;  /* 保持1:1的宽高比 */
+    object-fit: cover;
+    border: none;
+}
+
+.board__member-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px;
+    text-align: left;
+}
+
+.board__member-info h4 {
+    color: var(--color-primary);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    padding-bottom: 12px;
+    display: inline-block;
+    border-bottom: 1px solid #0E3E2A;
+}
+
+/* 创建一个包装职位和按钮的容器 */
+.board__member-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.board__member-info p {
+    color: #666;
+    font-size: 16px;
+    margin: 0;
+}
+
+.board__member-btn {
+    padding: 0;
+    background: #E8F3D6;
+    color: #0E3E2A;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.board__member-btn:hover {
+    background: #86A444;
+    color: #FFFFFF;
+    transform: translateX(4px);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .board-dropdown__content {
+        padding: 24px;
+    }
+    
+    .board__members {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        overflow-y: auto;
+        width: calc(100vw - 48px);  /* 屏幕宽度 - 左右内边距 */
+    }
+    
+    .board__member {
+        width: 100%;
+    }
+    
+    .board__member-img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* News Modal 样式 */
+.news-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 100;
+}
+
+.news-modal.active {
+    display: block;
+}
+
+.news-modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 101;
+}
+
+.news-modal__overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.news-modal__content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #FFFFFF;
+    width: 100vw;
+    height: 640px;
+    overflow-y: auto;
+    z-index: 102;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.news-modal__content.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .news-modal__content {
+        height: calc(100vh - 56px);  /* 屏幕高度 - 导航栏高度 */
+        top: 56px;  /* 从导航栏底部开始 */
+    }
+    
+    .news-modal__overlay {
+        top: 56px;  /* 遮罩层也从导航栏底部开始 */
+        height: calc(100% - 56px);
+    }
+}
+
+/* Project Modal 样式 */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 100;
+}
+
+.project-modal.active {
+    display: block;
+}
+
+.project-modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 101;
+}
+
+.project-modal__overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.project-modal__content {
+    position: fixed;
+    top: 0;  /* 初始位置设为0，具体位置由JS控制 */
+    left: 0;
+    background: #FFFFFF;
+    width: 100vw;
+    height: 640px;
+    overflow-y: auto;
+    z-index: 102;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.project-modal__content.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 统一的滚动条样式 */
+.board-dropdown__content::-webkit-scrollbar,
+.project-modal__content::-webkit-scrollbar,
+.news-modal__content::-webkit-scrollbar,
+.project-modal__body::-webkit-scrollbar,
+.project-modal__description::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+.board-dropdown__content::-webkit-scrollbar-track,
+.project-modal__content::-webkit-scrollbar-track,
+.news-modal__content::-webkit-scrollbar-track,
+.project-modal__body::-webkit-scrollbar-track,
+.project-modal__description::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+}
+
+.board-dropdown__content::-webkit-scrollbar-thumb,
+.project-modal__content::-webkit-scrollbar-thumb,
+.news-modal__content::-webkit-scrollbar-thumb,
+.project-modal__body::-webkit-scrollbar-thumb,
+.project-modal__description::-webkit-scrollbar-thumb {
+    background: #86A444 !important;
+    border-radius: 4px !important;
+}
+
+.board-dropdown__content::-webkit-scrollbar-thumb:hover,
+.project-modal__content::-webkit-scrollbar-thumb:hover,
+.news-modal__content::-webkit-scrollbar-thumb:hover,
+.project-modal__body::-webkit-scrollbar-thumb:hover,
+.project-modal__description::-webkit-scrollbar-thumb:hover {
+    background: #0E3E2A !important;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .project-modal__content {
+        height: calc(100vh - 56px);
+        top: 56px;
+    }
+    
+    .project-modal__overlay {
+        top: 56px;
+        height: calc(100% - 56px);
+    }
+}
+
+/* AgriTech Modal 样式 */
+.agritech-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 100;
+}
+
+.agritech-modal.active {
+    display: block;
+}
+
+.agritech-modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 101;
+}
+
+.agritech-modal__overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.agritech-modal__content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 0;  /* 初始高度为0 */
+    background: #FBFAF6;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 102;
+}
+
+.agritech-modal__content.active {
+    height: 640px;  /* 展开高度 */
+}
+
+.agritech-modal__body {
+    padding: 50px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .agritech-modal__content {
+        height: calc(100vh - 56px);
+        top: 56px;
+    }
+    
+    .agritech-modal__overlay {
+        top: 56px;
+        height: calc(100% - 56px);
+    }
+    
+    .agritech-modal__body {
+        padding: 24px;
+    }
+}
+
+/* 禁止滚动的工具类 */
+.no-scroll {
+    overflow: hidden !important;
+    position: fixed;  /* 防止 iOS 回弹效果 */
+    width: 100%;
+    height: 100%;
+}
+
